@@ -46,19 +46,19 @@ export default function ExplorerPage({
                 buttonTextForPause="Filmi duraklat"
                 thumbnailTextInHtml={
                     <>
-                        <p className="movie-location-text  movie-shade">
+                        <h2 className="movie-location-text  movie-shade">
                             <span className="movie-dash"></span>
 
                             BORÇKA, ARTVİN
-                        </p>
+                        </h2>
 
-                        <p className="movie-main-text  movie-shade">
+                        <h2 className="movie-main-text  movie-shade">
                             Macahel'e
-                        </p>
+                        </h2>
 
-                        <p className="movie-main-text  movie-shade">
+                        <h2 className="movie-main-text  movie-shade">
                             yukarıdan bak
-                        </p>
+                        </h2>
                     </>
                 }
             />
