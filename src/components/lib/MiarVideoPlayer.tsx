@@ -117,9 +117,9 @@ export default function MiarVideoPlayer({
                             setCurrentTime(trgTime);
                         }}
                     />
-
-                    {error && <p role="alert">{error}</p>}
                 </div>
+
+                {error && <p role="alert">{error}</p>}
             </div>
         </div>
     );

@@ -29,7 +29,7 @@ export default function ExplorerPage({
             <div className="latest-posts">
                 <MiarVideoPlayer
                     videoSrc="/videos/macahel/macahel-1.MOV"
-                    thumbnailSrc="/images/macahel/drone-video-cover-image.jpg"
+                    thumbnailSrc="/images/macahel/macahel-thumbnail.png"
                     buttonTextForPlay="Filmi izle"
                     buttonTextForPause="Filmi duraklat"
                     thumbnailTextInHtml={

@@ -9,6 +9,11 @@ function App() {
   const [selectedDistrictIndex, setSelectedDistrictIndex] = useState(0);
   const districts: District[] = [
     {
+      name: "Macahel",
+      icon: <TreesIcon />,
+      coverImagePath: "locations/macahel.png"
+    },
+    {
       name: "Ardanuç",
       icon: <TreesIcon />,
       coverImagePath: "locations/ardanuc.png"
@@ -37,11 +42,6 @@ function App() {
       name: "Kemalpaşa",
       icon: <TreesIcon />,
       coverImagePath: "locations/kemalpasa.png"
-    },
-    {
-      name: "Macahel",
-      icon: <TreesIcon />,
-      coverImagePath: "locations/macahel.png"
     },
     {
       name: "Murgul",
