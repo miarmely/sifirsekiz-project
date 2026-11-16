@@ -1,38 +1,7 @@
 #explorer-page {
-    &>.subnavbar {
-        margin-bottom: 5px;
-        padding: 12px 10px;
-        display: flex;
-        gap: 15px;
-        color: var(--text-color-main);
-        user-select: none;
-        overflow-x: auto;
+    &>.subnavbar {}
 
-        &:hover {
-            cursor: pointer;
-        }
-
-        & .subnavbar-menu {
-            padding: 5px 13px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 12px;
-            background-color: var(--bg-color-elevated-surface);
-            border-radius: 6px;
-            white-space: nowrap;
-
-            &.selected {
-                background-color: var(--bg-color-selected-menu);
-                border-left: 5.5px solid var(--bg-color-primary-btn);
-            }
-        }
-    }
-
-    &>.video-area {
-        & video {
-            width: stretch;
-            height: min-content;
-        }
+    &>.latest-posts {
+        padding: 5px var(--root-padding-right-left) 0px;
     }
 }

@@ -1,29 +1,75 @@
+import "./SubnavbarMenu.css";
 import type { ReactNode } from "react";
 import type { Setter } from "../models/Types";
 
-export default function SubnavbarMenu({
+export function SubnavbarMenuBox({
+    menus,
+    selectedMenuIndex,
+    setSelectedMenuIndex,
+    resetPaddingLeftRight
+}: SubnavbarMenuBoxProps) {
+    const subnavbarMenus = menus.map((menu, menuIndex) =>
+        <SubnavbarMenu
+            key={menuIndex}
+            index={menuIndex}
+            icon={menu.icon}
+            menuName={menu.name}
+            isSelected={menuIndex === selectedMenuIndex}
+            setSelectedMenuIndex={setSelectedMenuIndex}
+        />
+    );
+
+    const boxStyle = resetPaddingLeftRight ?
+        {
+            paddingLeft: "0px",
+            paddingRight: "0px"
+        }
+        : {};
+
+    return (
+        <div className="subnavbar"
+            style={boxStyle}>
+            {subnavbarMenus}
+        </div>
+    );
+}
+
+export function SubnavbarMenu({
     index,
     icon,
     menuName,
     isSelected,
-    setSelectedDistrictIndex
+    setSelectedMenuIndex
 }: SubnavbarMenuProps) {
-
     return (
         <div
             className={"subnavbar-menu " + (isSelected ? "selected" : "")}
-            onClick={() => setSelectedDistrictIndex(index)}
+            onClick={() => setSelectedMenuIndex(index)}
         >
-            {icon}
+            {icon && icon}
             <span>{menuName}</span>
         </div>
     );
 }
 
+
+export interface SubnavbarMenuModel {
+    index: number,
+    icon?: ReactNode,
+    name: string
+}
+
+export interface SubnavbarMenuBoxProps {
+    menus: SubnavbarMenuModel[],
+    selectedMenuIndex: number,
+    setSelectedMenuIndex: Setter<number>,
+    resetPaddingLeftRight?: boolean
+}
+
 export interface SubnavbarMenuProps {
     index: number,
-    icon: ReactNode,
+    icon?: ReactNode,
     menuName: string,
     isSelected: boolean,
-    setSelectedDistrictIndex: Setter<number>
+    setSelectedMenuIndex: Setter<number>
 }

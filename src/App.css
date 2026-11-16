@@ -11,7 +11,7 @@
   --divider-line-color-smooth: #8a948124;
   --font-heading: "Instrument Serif", Georgia, serif;
   --font-body: "Inter", system-ui, sans-serif;
-
+  --root-padding-right-left: 10px;
 }
 
 body {
@@ -33,6 +33,7 @@ h6 {
 
 .vertical-line {
   border: 1px solid var(--divider-line-color);
+  width: 0px;
 }
 
 .btn-trans {
@@ -51,4 +52,18 @@ h6 {
 
 .no-padding {
   padding: 0;
+}
+
+.section-title {
+  padding-inline-start: 5px;
+  display: flex;
+  gap: 15px;
+  color: var(--text-color-main);
+  text-align: start;
+
+  & .vertical-line {
+    height: stretch;
+    border: 2px solid var(--bg-color-primary-btn);
+    border-radius: 20px;
+  }
 }

@@ -6,7 +6,7 @@ import type { District } from './models/Interfaces';
 import { useState } from 'react';
 
 function App() {
-  const [selectedDistrictIndex, setSelectedDistrictIndex] = useState(0);
+  const [selectedDistrictMenuIndex, setSelectedDistrictMenuIndex] = useState(0);
   const districts: District[] = [
     {
       name: "Macahel",
@@ -66,8 +66,8 @@ function App() {
 
       <ExplorerPage
         districts={districts}
-        selectedDistrictIndex={selectedDistrictIndex}
-        setSelectedDistrictIndex={setSelectedDistrictIndex}
+        selectedDistrictMenuIndex={selectedDistrictMenuIndex}
+        setSelectedDistrictMenuIndex={setSelectedDistrictMenuIndex}
       />
     </>
   )
