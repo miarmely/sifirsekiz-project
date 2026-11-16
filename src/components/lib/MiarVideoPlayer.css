@@ -2,7 +2,7 @@
 .miar-video-player {
     position: relative;
     width: stretch;
-    aspect-ratio: 9 / 16;
+    aspect-ratio: 9 / 14;
     overflow: hidden;
     font-size: 10px;
 
@@ -10,8 +10,8 @@
         display: block;
         width: stretch;
         height: stretch;
-        object-fit: contain;
-        object-position: center;
+        object-fit: cover;
+        object-position: center bottom;
     }
 
     & .video-overlay {
