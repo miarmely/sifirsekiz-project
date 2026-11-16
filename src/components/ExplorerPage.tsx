@@ -3,7 +3,6 @@ import type { District } from "../models/Interfaces";
 import SubnavbarMenu from "./SubnavbarMenu";
 import type { Setter } from "../models/Types";
 import MiarVideoPlayer from "./lib/MiarVideoPlayer";
-import { FileX } from "lucide-react";
 
 export default function ExplorerPage({
     districts,
