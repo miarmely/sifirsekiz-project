@@ -1,6 +1,6 @@
 import "./ExplorerPage.css";
 import type { District } from "../models/Interfaces";
-import { SubnavbarMenuBox, SubnavbarMenu, type SubnavbarMenuModel } from "./SubnavbarMenu";
+import { SubnavbarMenuBox, type SubnavbarMenuModel } from "./SubnavbarMenu";
 import type { Setter } from "../models/Types";
 import MiarVideoPlayer from "./lib/MiarVideoPlayer";
 import { useState } from "react";

@@ -1,6 +1,4 @@
 #explorer-page {
-    &>.subnavbar {}
-
     &>.latest-posts {
         padding: 5px var(--root-padding-right-left) 0px;
     }
