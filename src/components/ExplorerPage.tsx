@@ -4,6 +4,7 @@ import { SubnavbarMenuBox, type SubnavbarMenuModel } from "./SubnavbarMenu";
 import type { Setter } from "../models/Types";
 import MiarVideoPlayer from "./lib/MiarVideoPlayer";
 import { useState } from "react";
+import VideoPost from "./posts/VideoPost";
 
 export default function ExplorerPage({
     districts,
@@ -40,31 +41,32 @@ export default function ExplorerPage({
             />
 
             <MiarVideoPlayer
-                videoSrc="/videos/macahel/macahel-1.MOV"
-                thumbnailSrc="/images/macahel/macahel-thumbnail.png"
+                type={1}
+                videoSrc="/videos/artvin/content-1.mp4"
+                thumbnailSrc="/images/artvin/content-1.png"
                 buttonTextForPlay="Filmi izle"
                 buttonTextForPause="Filmi duraklat"
                 thumbnailTextInHtml={
                     <>
-                        <h2 className="movie-location-text  movie-shade">
+                        <p className="location-text  item-shade">
                             <span className="movie-dash"></span>
 
-                            BORÇKA, ARTVİN
-                        </h2>
+                            MARAL ŞELALESİ, MACAHEL
+                        </p>
 
-                        <h2 className="movie-main-text  movie-shade">
-                            Macahel'e
-                        </h2>
+                        <p className="movie-main-text  item-shade">
+                            Artvin'in
+                        </p>
 
-                        <h2 className="movie-main-text  movie-shade">
-                            yukarıdan bak
-                        </h2>
+                        <p className="movie-main-text  item-shade">
+                            eşşiz sonbaharı
+                        </p>
                     </>
                 }
             />
 
             <div className="latest-posts">
-                <h2 className="section-title">
+                <h2 className="title-section">
                     <div className="vertical-line"></div>
                     Son paylaşımlar
                 </h2>
@@ -75,6 +77,38 @@ export default function ExplorerPage({
                     setSelectedMenuIndex={setSelectedLatestPostsMenuIndex}
                     resetPaddingLeftRight={true}
                 />
+
+                <div className="content">
+                    <VideoPost
+                        videoSrc="/videos/artvin/content-2.mp4"
+                        thumbnailSrc="/images/artvin/content-2.png"
+                    />
+
+                    <VideoPost
+                        videoSrc="/videos/artvin/content-1.mp4"
+                        thumbnailSrc="/images/artvin/content-1.png"
+                    />
+
+                    <VideoPost
+                        videoSrc="/videos/artvin/content-2.mp4"
+                        thumbnailSrc="/images/artvin/content-1.png"
+                    />
+
+                    <VideoPost
+                        videoSrc="/videos/artvin/content-1.mp4"
+                        thumbnailSrc="/images/artvin/content-2.png"
+                    />
+
+                    <VideoPost
+                        videoSrc="/videos/artvin/content-1.mp4"
+                        thumbnailSrc="/images/artvin/content-1.png"
+                    />
+
+                    <VideoPost
+                        videoSrc="/videos/artvin/content-2.mp4"
+                        thumbnailSrc="/images/artvin/content-2.png"
+                    />
+                </div>
             </div >
         </div >
     );

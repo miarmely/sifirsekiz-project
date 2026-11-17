@@ -24,7 +24,7 @@ function App() {
       coverImagePath: "locations/arhavi.png"
     },
     {
-      name: "Artvin Merkez",
+      name: "Merkez",
       icon: <TreesIcon />,
       coverImagePath: "locations/artvin-merkez.png"
     },

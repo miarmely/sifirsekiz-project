@@ -54,7 +54,7 @@ h6 {
   padding: 0;
 }
 
-.section-title {
+.title-section {
   padding-inline-start: 5px;
   display: flex;
   gap: 15px;
@@ -65,4 +65,25 @@ h6 {
     border: 2px solid var(--bg-color-primary-btn);
     border-radius: 20px;
   }
+}
+
+.item-shade {
+  --shade-color: rgb(0 18 12 / 80%);
+
+  width: fit-content;
+  padding-inline: 5px;
+  border-radius: 20px;
+  background-color: var(--shade-color);
+  box-shadow: 0px 0px 15px 15px var(--shade-color);
+}
+
+.location-text {
+  margin: 0 0 5px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 10px;
+  color: red;
+  letter-spacing: 3px;
+  font-size: 0.8em;
 }

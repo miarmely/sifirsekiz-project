@@ -16,7 +16,7 @@ export default function Navbar({
                 <div className="vertical-line" style={{ height: "50px" }}></div>
 
                 <div className="title">
-                    <h2>Sıfır Sekiz</h2>
+                    <h2>ARTVİN</h2>
 
                     <h4>
                         <TextSlider
