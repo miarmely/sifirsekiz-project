@@ -5,6 +5,7 @@
   --bg-color-selected-menu: #2E4411;
   --bg-color-location-card: #192F10;
   --text-color-main: #F5EADB;
+  --text-color-second: rgb(140, 140, 140);
   --text-color-primary-btn: #000000;
   --border-color-selected-menu: #BADE13;
   --divider-line-color: #8A9480;
@@ -54,8 +55,8 @@ h6 {
   padding: 0;
 }
 
+/* ------------ title-section ------------ */
 .title-section {
-  padding-inline-start: 5px;
   display: flex;
   gap: 15px;
   color: var(--text-color-main);
@@ -66,6 +67,7 @@ h6 {
     border-radius: 20px;
   }
 }
+
 
 .item-shade {
   --shade-color: rgb(0 18 12 / 80%);
@@ -86,4 +88,15 @@ h6 {
   color: red;
   letter-spacing: 3px;
   font-size: 0.8em;
+}
+
+.add-cursor:hover {
+  cursor: pointer;
+}
+
+.one-line {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
 }

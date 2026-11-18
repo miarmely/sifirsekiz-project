@@ -98,10 +98,14 @@
     & .video-overlay {
         --padding-lr: 7px;
 
-        /* background: none; */
+        inset: 50%;
 
         & .video-thumbnail-text {
-            /* background: none; */
+            background: none;
+
+            & .play-btn {
+                transform: translateX(-50%) translateY(-50%);
+            }
         }
     }
 

@@ -1,10 +1,15 @@
 import "./ExplorerPage.css";
-import type { District } from "../models/Interfaces";
-import { SubnavbarMenuBox, type SubnavbarMenuModel } from "./SubnavbarMenu";
+import { useState } from "react";
+import type { District, UserModel } from "../models/Interfaces";
 import type { Setter } from "../models/Types";
 import MiarVideoPlayer from "./lib/MiarVideoPlayer";
-import { useState } from "react";
+import { SubnavbarMenuBox, type SubnavbarMenuModel } from "./SubnavbarMenu";
+import PostPreviewBox from "./posts/previews/PostPreviewBox";
+import VideoPreviewPost from "./posts/previews/VideoPreviewPost";
+import ImagePreviewPost from "./posts/previews/ImagePreviewPost";
+import PostBox from "./posts/PostBox";
 import VideoPost from "./posts/VideoPost";
+
 
 export default function ExplorerPage({
     districts,
@@ -31,84 +36,156 @@ export default function ExplorerPage({
         };
     })
 
+    const users: UserModel[] = [
+        {
+            username: "merve.sinankaya",
+            profileImagePath: "/images/profile-images/user-1.png"
+        },
+        {
+            username: "aleyna3421",
+            profileImagePath: "/images/profile-images/user-2.png"
+        },
+        {
+            username: "karadenizkizii",
+            profileImagePath: "/images/profile-images/user-3.png"
+        },
+        {
+            username: "hekimoglu.official",
+            profileImagePath: "/images/profile-images/user-4.png"
+        },
+        {
+            username: "mert_akdmir",
+            profileImagePath: "/images/profile-images/user-5.png"
+        },
+    ]
+
 
     return (
         <div id="explorer-page">
-            <SubnavbarMenuBox
-                menus={explorerPageMenus}
-                selectedMenuIndex={selectedDistrictMenuIndex}
-                setSelectedMenuIndex={setSelectedDistrictMenuIndex}
-            />
-
-            <MiarVideoPlayer
-                type={1}
-                videoSrc="/videos/artvin/content-1.mp4"
-                thumbnailSrc="/images/artvin/content-1.png"
-                buttonTextForPlay="Filmi izle"
-                buttonTextForPause="Filmi duraklat"
-                thumbnailTextInHtml={
-                    <>
-                        <p className="location-text  item-shade">
-                            <span className="movie-dash"></span>
-
-                            MARAL ŞELALESİ, MACAHEL
-                        </p>
-
-                        <p className="movie-main-text  item-shade">
-                            Artvin'in
-                        </p>
-
-                        <p className="movie-main-text  item-shade">
-                            eşşiz sonbaharı
-                        </p>
-                    </>
-                }
-            />
-
-            <div className="latest-posts">
-                <h2 className="title-section">
-                    <div className="vertical-line"></div>
-                    Son paylaşımlar
-                </h2>
-
+            <div className="promo-video">
                 <SubnavbarMenuBox
-                    menus={latestPostsMenus}
-                    selectedMenuIndex={selectedLatestPostsMenuIndex}
-                    setSelectedMenuIndex={setSelectedLatestPostsMenuIndex}
-                    resetPaddingLeftRight={true}
+                    menus={explorerPageMenus}
+                    selectedMenuIndex={selectedDistrictMenuIndex}
+                    setSelectedMenuIndex={setSelectedDistrictMenuIndex}
                 />
 
-                <div className="content">
-                    <VideoPost
-                        videoSrc="/videos/artvin/content-2.mp4"
-                        thumbnailSrc="/images/artvin/content-2.png"
-                    />
+                <MiarVideoPlayer
+                    type={1}
+                    videoSrc="/videos/artvin/content-1.mp4"
+                    thumbnailSrc="/images/artvin/content-1.png"
+                    buttonTextForPlay="Filmi izle"
+                    buttonTextForPause="Filmi duraklat"
+                    thumbnailTextInHtml={
+                        <>
+                            <p className="location-text  item-shade">
+                                <span className="movie-dash"></span>
 
-                    <VideoPost
-                        videoSrc="/videos/artvin/content-1.mp4"
-                        thumbnailSrc="/images/artvin/content-1.png"
-                    />
+                                MARAL ŞELALESİ, MACAHEL
+                            </p>
 
-                    <VideoPost
-                        videoSrc="/videos/artvin/content-2.mp4"
-                        thumbnailSrc="/images/artvin/content-1.png"
-                    />
+                            <p className="movie-main-text  item-shade">
+                                Artvin'in
+                            </p>
 
-                    <VideoPost
-                        videoSrc="/videos/artvin/content-1.mp4"
-                        thumbnailSrc="/images/artvin/content-2.png"
-                    />
+                            <p className="movie-main-text  item-shade">
+                                eşşiz sonbaharı
+                            </p>
+                        </>
+                    }
+                />
+            </div>
 
-                    <VideoPost
-                        videoSrc="/videos/artvin/content-1.mp4"
-                        thumbnailSrc="/images/artvin/content-1.png"
-                    />
+            <div className="latest-posts" style={{ display: "none" }}>
+                <div className="head">
+                    <h2 className="title-section">
+                        <div className="vertical-line"></div>
+                        Son paylaşımlar
+                    </h2>
 
-                    <VideoPost
-                        videoSrc="/videos/artvin/content-2.mp4"
-                        thumbnailSrc="/images/artvin/content-2.png"
+                    <SubnavbarMenuBox
+                        menus={latestPostsMenus}
+                        selectedMenuIndex={selectedLatestPostsMenuIndex}
+                        setSelectedMenuIndex={setSelectedLatestPostsMenuIndex}
+                        resetPaddingLeftRight={true}
                     />
                 </div>
+
+                <PostPreviewBox>
+                    <VideoPreviewPost thumbnailSrc="/images/artvin/content-2.png" />
+                    <ImagePreviewPost imgSrc="/images/artvin/content-1.png" />
+                    <ImagePreviewPost imgSrc="/images/artvin/content-1.png" />
+                </PostPreviewBox>
+            </div>
+
+            <div className="latest-posts">
+                <div className="head">
+                    <h2 className="title-section">
+                        {/* <ArrowLeftIcon className="exit-page  add-cursor" /> */}
+                        <div className="vertical-line"></div>
+                        <span>Son paylaşımlar</span>
+                    </h2>
+
+                    <SubnavbarMenuBox
+                        menus={latestPostsMenus}
+                        selectedMenuIndex={selectedLatestPostsMenuIndex}
+                        setSelectedMenuIndex={setSelectedLatestPostsMenuIndex}
+                        resetPaddingLeftRight={true}
+                    />
+                </div>
+
+                <PostBox>
+                    <VideoPost
+                        videoSrc="/videos/artvin/content-2.mp4"
+                        thumbnailSrc="/images/artvin/content-2.png"
+                        videoDetails={{
+                            owner: users[3],
+                            location: "Lekoban yaylası, Macahel",
+                            description: "Atabarı türküsünü birde böyle dinleyin. asdasd sa",
+                            likes: [
+                                { likedBy: users[0] },
+                                { likedBy: users[1] },
+                                { likedBy: users[2] },
+                                { likedBy: users[3] },
+                                { likedBy: users[4] },
+                            ],
+                            comments: [
+                                { comment: "Çok güzel bir içerik olmuş.", commentedBy: users[2] },
+                                { comment: "Harika.", commentedBy: users[1] },
+                                { comment: "Muhteşem bir manzara.", commentedBy: users[5] }
+                            ],
+                            shareCount: 4,
+                            publishedAt: "23 Ekim"
+                        }}
+                    />
+
+                    <VideoPost
+                        videoSrc="/videos/artvin/content-1.mp4"
+                        thumbnailSrc="/images/artvin/content-1.png"
+                        videoDetails={{
+                            owner: users[2],
+                            location: "Maral şelalesi, Macahel",
+                            description: "Artvin'in eşsiz sonbaharı.",
+                            likes: [
+                                { likedBy: users[1] },
+                                { likedBy: users[2] },
+                                { likedBy: users[3] },
+                            ],
+                            comments: [
+                                { comment: "Çok güzel bir içerik olmuş.", commentedBy: users[2] },
+                                { comment: "Harika.", commentedBy: users[1] },
+                                { comment: "Muhteşem bir manzara.", commentedBy: users[5] },
+                                { comment: "Çok güzel bir içerik olmuş.", commentedBy: users[2] },
+                                { comment: "Harika.", commentedBy: users[1] },
+                                { comment: "Muhteşem bir manzara.", commentedBy: users[3] },
+                                { comment: "Çok güzel bir içerik olmuş.", commentedBy: users[2] },
+                                { comment: "Harika.", commentedBy: users[1] },
+                                { comment: "Muhteşem bir manzara.", commentedBy: users[5] }
+                            ],
+                            shareCount: 4,
+                            publishedAt: "23 Ekim"
+                        }}
+                    />
+                </PostBox>
             </div >
         </div >
     );

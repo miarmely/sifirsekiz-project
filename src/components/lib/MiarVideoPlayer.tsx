@@ -108,6 +108,67 @@ export default function MiarVideoPlayer({
         </div>
     );
 
+    const videoOverlayForType2 = (
+        <div className="video-overlay">
+            {!isPlaying &&
+                <div className="video-thumbnail-text">
+                    <button
+                        className="play-btn  btn-trans  item-shade"
+                        onClick={togglePlayback}
+                    >
+                        {isPlaying ?
+                            <>
+                                <PauseIcon />
+                                {buttonTextForPause && <span>{buttonTextForPause}</span>}
+                            </>
+                            :
+                            <>
+                                <PlayIcon />
+                                {buttonTextForPlay && <span>{buttonTextForPlay}</span>}
+                            </>
+                        }
+                    </button>
+                </div>
+            }
+
+            {/* <div className="video-controls">
+                <button
+                    className="play-btn  btn-trans"
+                    type="button"
+                    onClick={togglePlayback}
+                >
+                    {isPlaying ? <PauseIcon /> : <PlayIcon />}
+                </button>
+
+                <div className="video-time">
+                    {toVideoTime(currentTime, addHoursSection.current)}
+                    <span> / </span>
+                    {toVideoTime(duration, addHoursSection.current)}
+                </div>
+
+                <input
+                    className="video-location"
+                    aria-label="Video konumu"
+                    type="range"
+                    min={0}
+                    max={duration}
+                    step={0.1}
+                    value={currentTime}
+                    disabled={duration === 0}
+                    onChange={e => {
+                        const trgTime = e.currentTarget.valueAsNumber;
+                        const video = videoRef.current;
+                        if (!trgTime || !video) return;
+
+                        video.currentTime = trgTime;
+                        setCurrentTime(trgTime);
+                    }}
+                />
+            </div> */}
+
+            {error && <p role="alert">{error}</p>}
+        </div>
+    );
 
     return (
         <div className="miar-video-player" data-type={type}>
@@ -130,17 +191,17 @@ export default function MiarVideoPlayer({
                 muted={isMuted === true}
             />
 
-            {type === 1 && videoOverlayForType1}
+            {type === 1 ? videoOverlayForType1 : videoOverlayForType2}
         </div>
     );
 }
 
 export interface MiarVideoPlayerProps {
+    type: number,  // 1 or 2
     videoSrc: string,
     thumbnailSrc: string,
     buttonTextForPlay?: string,
     buttonTextForPause?: string,
     thumbnailTextInHtml?: React.JSX.Element,
-    isMuted?: boolean,
-    type: number
+    isMuted?: boolean
 }
