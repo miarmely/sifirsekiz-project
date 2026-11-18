@@ -55,6 +55,10 @@ export default function ExplorerPage({
         },
         {
             username: "mert_akdmir",
+            profileImagePath: "/images/profile-images/user-4.png"
+        },
+        {
+            username: "dogan_akdemir",
             profileImagePath: "/images/profile-images/user-5.png"
         },
     ]
@@ -135,12 +139,68 @@ export default function ExplorerPage({
 
                 <PostBox>
                     <VideoPost
+                        videoSrc="/videos/artvin/content-4.mp4"
+                        thumbnailSrc="/images/artvin/content-4.png"
+                        videoDetails={{
+                            owner: users[5],
+                            location: "Macahel, Artvin",
+                            description: "Artvin iyileştirir.",
+                            likes: [
+                                { likedBy: users[2] },
+                                { likedBy: users[3] },
+                                { likedBy: users[2] },
+                                { likedBy: users[1] },
+                                { likedBy: users[2] },
+                                { likedBy: users[3] },
+                                { likedBy: users[1] },
+                                { likedBy: users[2] },
+                                { likedBy: users[3] },
+                                { likedBy: users[1] },
+                                { likedBy: users[2] },
+                                { likedBy: users[3] },
+                                { likedBy: users[1] },
+                                { likedBy: users[2] },
+                                { likedBy: users[3] },
+                                { likedBy: users[1] },
+                                { likedBy: users[2] },
+                                { likedBy: users[3] },
+                            ],
+                            comments: [
+                                { comment: "Çok güzel bir içerik olmuş.", commentedBy: users[2] },
+                                { comment: "Harika.", commentedBy: users[1] },
+                                { comment: "Muhteşem bir manzara.", commentedBy: users[5] },
+                                { comment: "Çok güzel bir içerik olmuş.", commentedBy: users[2] },
+                                { comment: "Harika.", commentedBy: users[1] },
+                                { comment: "Muhteşem bir manzara.", commentedBy: users[3] },
+                                { comment: "Çok güzel bir içerik olmuş.", commentedBy: users[2] },
+                                { comment: "Harika.", commentedBy: users[1] },
+                                { comment: "Muhteşem bir manzara.", commentedBy: users[5] },
+                                { comment: "Çok güzel bir içerik olmuş.", commentedBy: users[2] },
+                                { comment: "Harika.", commentedBy: users[1] },
+                                { comment: "Muhteşem bir manzara.", commentedBy: users[3] },
+                                { comment: "Çok güzel bir içerik olmuş.", commentedBy: users[2] },
+                                { comment: "Harika.", commentedBy: users[1] },
+                                { comment: "Muhteşem bir manzara.", commentedBy: users[5] },
+                                { comment: "Çok güzel bir içerik olmuş.", commentedBy: users[2] },
+                                { comment: "Harika.", commentedBy: users[1] },
+                                { comment: "Muhteşem bir manzara.", commentedBy: users[3] },
+                                { comment: "Çok güzel bir içerik olmuş.", commentedBy: users[2] },
+                                { comment: "Harika.", commentedBy: users[1] },
+                                { comment: "Muhteşem bir manzara.", commentedBy: users[5] },
+
+                            ],
+                            shareCount: 7,
+                            publishedAt: "23 Ekim"
+                        }}
+                    />
+
+                    <VideoPost
                         videoSrc="/videos/artvin/content-2.mp4"
                         thumbnailSrc="/images/artvin/content-2.png"
                         videoDetails={{
                             owner: users[3],
                             location: "Lekoban yaylası, Macahel",
-                            description: "Atabarı türküsünü birde böyle dinleyin. asdasd sa",
+                            description: "Atabarı türküsünü bir de böyle dinleyin.",
                             likes: [
                                 { likedBy: users[0] },
                                 { likedBy: users[1] },

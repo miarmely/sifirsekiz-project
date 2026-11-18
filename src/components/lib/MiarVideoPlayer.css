@@ -11,7 +11,7 @@
         width: stretch;
         height: stretch;
         object-fit: cover;
-        object-position: center bottom;
+        object-position: center;
     }
 
     & .video-overlay {
