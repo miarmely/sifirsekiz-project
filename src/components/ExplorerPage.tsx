@@ -71,8 +71,8 @@ export default function ExplorerPage({
 
                 <MiarVideoPlayer
                     type={1}
-                    videoSrc="/videos/artvin/content-1.mp4"
-                    thumbnailSrc="/images/artvin/content-1.png"
+                    videoSrc="/videos/artvin/content-3.mp4"
+                    thumbnailSrc="/images/artvin/content-3.png"
                     buttonTextForPlay="Filmi izle"
                     buttonTextForPause="Filmi duraklat"
                     thumbnailTextInHtml={
@@ -80,15 +80,15 @@ export default function ExplorerPage({
                             <p className="location-text  item-shade">
                                 <span className="movie-dash"></span>
 
-                                MARAL ŞELALESİ, MACAHEL
+                                Artvin
                             </p>
 
                             <p className="movie-main-text  item-shade">
-                                Artvin'in
+                                Bir ara,
                             </p>
 
                             <p className="movie-main-text  item-shade">
-                                eşşiz sonbaharı
+                                bir Artvin mi yapsak?
                             </p>
                         </>
                     }
@@ -182,6 +182,54 @@ export default function ExplorerPage({
                                 { comment: "Muhteşem bir manzara.", commentedBy: users[5] }
                             ],
                             shareCount: 4,
+                            publishedAt: "23 Ekim"
+                        }}
+                    />
+
+                    <VideoPost
+                        videoSrc="/videos/artvin/content-3.mp4"
+                        thumbnailSrc="/images/artvin/content-3.png"
+                        videoDetails={{
+                            owner: users[1],
+                            location: "Artvin",
+                            description: "Bir ara, bir Artvin mi yapsak?",
+                            likes: [
+                                { likedBy: users[4] },
+                                { likedBy: users[2] },
+                                { likedBy: users[1] },
+                                { likedBy: users[4] },
+                                { likedBy: users[2] },
+                                { likedBy: users[1] },
+                                { likedBy: users[4] },
+                                { likedBy: users[2] },
+                                { likedBy: users[1] },
+                                { likedBy: users[4] },
+                                { likedBy: users[2] },
+                                { likedBy: users[1] },
+                                { likedBy: users[4] },
+                                { likedBy: users[2] },
+                                { likedBy: users[1] },
+                                { likedBy: users[4] },
+                                { likedBy: users[2] },
+                                { likedBy: users[1] },
+                                { likedBy: users[4] },
+                                { likedBy: users[2] },
+                                { likedBy: users[1] },
+
+                            ],
+                            comments: [
+                                { comment: "Çok güzel bir içerik olmuş.", commentedBy: users[2] },
+                                { comment: "Harika.", commentedBy: users[1] },
+                                { comment: "Muhteşem bir manzara.", commentedBy: users[5] },
+                                { comment: "Çok güzel bir içerik olmuş.", commentedBy: users[2] },
+                                { comment: "Harika.", commentedBy: users[1] },
+                                { comment: "Muhteşem bir manzara.", commentedBy: users[3] },
+                                { comment: "Çok güzel bir içerik olmuş.", commentedBy: users[2] },
+                                { comment: "Muhteşem bir manzara.", commentedBy: users[3] },
+                                { comment: "Çok güzel bir içerik olmuş.", commentedBy: users[2] },
+                                { comment: "Muhteşem bir manzara.", commentedBy: users[3] },
+                            ],
+                            shareCount: 17,
                             publishedAt: "23 Ekim"
                         }}
                     />
