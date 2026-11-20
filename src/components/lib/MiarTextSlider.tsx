@@ -18,6 +18,7 @@ export default function TextSlider({
             setIndex(prev => (prev + 1) % textArray.length);
         }, slideTimeMs);
 
+        // clear "interval" when component unmounted
         return () => clearInterval(intervalId);
     }, []);
 

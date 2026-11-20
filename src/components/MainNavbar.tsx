@@ -1,15 +1,15 @@
-import "./Navbar.css";
+import "./MainNavbar.css";
 import { MenuIcon } from "lucide-react";
 import TextSlider from "./lib/MiarTextSlider";
 import type { District } from "../models/Interfaces";
 
-export default function Navbar({
+export default function MainNavbar({
     districts
 }: NavbarProps) {
     const districtNames = districts.map(d => d.name);
 
     return (
-        <div className="main-navbar">
+        <nav className="main-navbar">
             <div className="left">
                 <img src="/images/sifirsekiz-logo-circle.svg" />
 
@@ -34,7 +34,7 @@ export default function Navbar({
                     <MenuIcon />
                 </button>
             </div>
-        </div >
+        </nav >
     );
 }
 

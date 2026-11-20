@@ -1,14 +1,16 @@
 import "./ExplorerPage.css";
 import { useState } from "react";
-import type { District, UserModel } from "../models/Interfaces";
+import type { District } from "../models/Interfaces";
 import type { Setter } from "../models/Types";
 import MiarVideoPlayer from "./lib/MiarVideoPlayer";
-import { SubnavbarMenuBox, type SubnavbarMenuModel } from "./SubnavbarMenu";
-import PostPreviewBox from "./posts/previews/PostPreviewBox";
-import VideoPreviewPost from "./posts/previews/VideoPreviewPost";
-import ImagePreviewPost from "./posts/previews/ImagePreviewPost";
-import PostBox from "./posts/PostBox";
-import VideoPost from "./posts/VideoPost";
+import { SubnavbarMenuBox, type SubnavbarMenuModel } from "./partner/SubnavbarMenu";
+import PostPreviewBox from "./partner/posts/previews/PostPreviewBox";
+import VideoPreviewPost from "./partner/posts/previews/VideoPreviewPost";
+import ImagePreviewPost from "./partner/posts/previews/ImagePreviewPost";
+import PostBox from "./partner/posts/PostBox";
+import type { PostDetails, UserModel } from "../models/PostDetails";
+import ImagePost from "./partner/posts/ImagePost";
+import VideoPost from "./partner/posts/VideoPost";
 
 
 export default function ExplorerPage({
@@ -61,8 +63,59 @@ export default function ExplorerPage({
             username: "dogan_akdemir",
             profileImagePath: "/images/profile-images/user-5.png"
         },
-    ]
+    ];
 
+    const postDetails: PostDetails = {
+        owner: users[0],
+        location: "Macahel, Artvin",
+        description: "Artvin iyileştirir.",
+        likes: [
+            { likedBy: users[2] },
+            { likedBy: users[3] },
+            { likedBy: users[2] },
+            { likedBy: users[1] },
+            { likedBy: users[2] },
+            { likedBy: users[3] },
+            { likedBy: users[1] },
+            { likedBy: users[2] },
+            { likedBy: users[3] },
+            { likedBy: users[1] },
+            { likedBy: users[2] },
+            { likedBy: users[3] },
+            { likedBy: users[1] },
+            { likedBy: users[2] },
+            { likedBy: users[3] },
+            { likedBy: users[1] },
+            { likedBy: users[2] },
+            { likedBy: users[3] },
+        ],
+        comments: [
+            { comment: "Çok güzel bir içerik olmuş.", commentedBy: users[2] },
+            { comment: "Harika.", commentedBy: users[1] },
+            { comment: "Muhteşem bir manzara.", commentedBy: users[5] },
+            { comment: "Çok güzel bir içerik olmuş.", commentedBy: users[2] },
+            { comment: "Harika.", commentedBy: users[1] },
+            { comment: "Muhteşem bir manzara.", commentedBy: users[3] },
+            { comment: "Çok güzel bir içerik olmuş.", commentedBy: users[2] },
+            { comment: "Harika.", commentedBy: users[1] },
+            { comment: "Muhteşem bir manzara.", commentedBy: users[5] },
+            { comment: "Çok güzel bir içerik olmuş.", commentedBy: users[2] },
+            { comment: "Harika.", commentedBy: users[1] },
+            { comment: "Muhteşem bir manzara.", commentedBy: users[3] },
+            { comment: "Çok güzel bir içerik olmuş.", commentedBy: users[2] },
+            { comment: "Harika.", commentedBy: users[1] },
+            { comment: "Muhteşem bir manzara.", commentedBy: users[5] },
+            { comment: "Çok güzel bir içerik olmuş.", commentedBy: users[2] },
+            { comment: "Harika.", commentedBy: users[1] },
+            { comment: "Muhteşem bir manzara.", commentedBy: users[3] },
+            { comment: "Çok güzel bir içerik olmuş.", commentedBy: users[2] },
+            { comment: "Harika.", commentedBy: users[1] },
+            { comment: "Muhteşem bir manzara.", commentedBy: users[5] },
+
+        ],
+        shareCount: 7,
+        publishedAt: "23 Ekim"
+    };
 
     return (
         <div id="explorer-page">
@@ -99,7 +152,7 @@ export default function ExplorerPage({
                 />
             </div>
 
-            <div className="latest-posts" style={{ display: "none" }}>
+            <div className="latest-posts-grid">
                 <div className="head">
                     <h2 className="title-section">
                         <div className="vertical-line"></div>
@@ -121,7 +174,7 @@ export default function ExplorerPage({
                 </PostPreviewBox>
             </div>
 
-            <div className="latest-posts">
+            <div className="latest-posts-feed">
                 <div className="head">
                     <h2 className="title-section">
                         {/* <ArrowLeftIcon className="exit-page  add-cursor" /> */}
@@ -139,9 +192,9 @@ export default function ExplorerPage({
 
                 <PostBox>
                     <VideoPost
-                        videoSrc="/videos/artvin/content-4.mp4"
+                        videoSrc="/videos/artvin/content-2.mp4"
                         thumbnailSrc="/images/artvin/content-4.png"
-                        videoDetails={{
+                        postDetails={{
                             owner: users[5],
                             location: "Macahel, Artvin",
                             description: "Artvin iyileştirir.",
@@ -195,9 +248,9 @@ export default function ExplorerPage({
                     />
 
                     <VideoPost
-                        videoSrc="/videos/artvin/content-2.mp4"
+                        videoSrc="/videos/artvin/content-1.mp4"
                         thumbnailSrc="/images/artvin/content-2.png"
-                        videoDetails={{
+                        postDetails={{
                             owner: users[3],
                             location: "Lekoban yaylası, Macahel",
                             description: "Atabarı türküsünü bir de böyle dinleyin.",
@@ -218,10 +271,20 @@ export default function ExplorerPage({
                         }}
                     />
 
+                    <ImagePost
+                        imgSrc="/images/artvin/content-2.png"
+                        postDetails={postDetails}
+                    />
+
+                    <ImagePost
+                        imgSrc="/images/artvin/content-3.png"
+                        postDetails={postDetails}
+                    />
+
                     <VideoPost
-                        videoSrc="/videos/artvin/content-1.mp4"
+                        videoSrc="/videos/artvin/content-4.mp4"
                         thumbnailSrc="/images/artvin/content-1.png"
-                        videoDetails={{
+                        postDetails={{
                             owner: users[2],
                             location: "Maral şelalesi, Macahel",
                             description: "Artvin'in eşsiz sonbaharı.",
@@ -249,7 +312,7 @@ export default function ExplorerPage({
                     <VideoPost
                         videoSrc="/videos/artvin/content-3.mp4"
                         thumbnailSrc="/images/artvin/content-3.png"
-                        videoDetails={{
+                        postDetails={{
                             owner: users[1],
                             location: "Artvin",
                             description: "Bir ara, bir Artvin mi yapsak?",

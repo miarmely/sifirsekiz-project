@@ -1,0 +1,18 @@
+.post-box {
+    &>.img-post {
+
+        &>.body {
+
+            &>* {
+                /* for remove redundancy spaces */
+                display: block;
+            }
+
+            /* keep original aspect ratio */
+            & img {
+                width: 100%;
+                height: auto;
+            }
+        }
+    }
+}

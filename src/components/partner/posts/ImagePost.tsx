@@ -1,36 +1,33 @@
-
-import "./VideoPost.css";
-import MiarVideoPlayer from "../lib/MiarVideoPlayer";
+import "./ImagePost.css";
 import { BookmarkIcon, HeartIcon, MapPinIcon, MessageCircleIcon, SendIcon, TextAlignJustifyStart } from "lucide-react"
-import VerifiedBadgeIcon from "../lib/icons/VerifiedBadgeIcon";
-import type { VideoDetails } from "../../models/Interfaces";
+import VerifiedBadgeIcon from "../../lib/icons/VerifiedBadgeIcon";
+import type { PostDetails } from "../../../models/PostDetails";
 
-export default function VideoPost({
-    videoSrc,
-    thumbnailSrc,
-    videoDetails
-}: VideoPostProps) {
+export default function ImagePost({
+    imgSrc,
+    postDetails
+}: ImagePostProps) {
     const maxProfileImgCount = 3;  // profile images at "liked by users" area
-    const likeCount = videoDetails.likes.length;
+    const likeCount = postDetails.likes.length;
 
     return (
-        <div className="post  video-post  add-cursor">
+        <div className="post  img-post  add-cursor">
             <div className="head">
                 <img
                     className="profile-img"
-                    src={videoDetails.owner.profileImagePath}
+                    src={postDetails.owner.profileImagePath}
                 />
 
                 <div className="username-area">
                     <p className="username  one-line">
-                        {videoDetails.owner.username}
+                        {postDetails.owner.username}
                         <VerifiedBadgeIcon />
                     </p>
                     {/* <p className="song">Koliva - Yüksek Dağlara Doğru</p> */}
 
                     <p className="location  one-line ">
                         <MapPinIcon className="icon" />
-                        {videoDetails.location}
+                        {postDetails.location}
                     </p>
                 </div>
 
@@ -38,11 +35,7 @@ export default function VideoPost({
             </div>
 
             <div className="body">
-                <MiarVideoPlayer
-                    type={2}
-                    videoSrc={videoSrc}
-                    thumbnailSrc={thumbnailSrc}
-                />
+                <img src={imgSrc} />
             </div>
 
             <div className="foot">
@@ -53,7 +46,7 @@ export default function VideoPost({
                             type="button"
                         >
                             <HeartIcon />
-                            <span>{videoDetails.likes.length}</span>
+                            <span>{postDetails.likes.length}</span>
                         </button>
 
                         <button
@@ -61,7 +54,7 @@ export default function VideoPost({
                             type="button"
                         >
                             <MessageCircleIcon />
-                            <span>{videoDetails.comments.length}</span>
+                            <span>{postDetails.comments.length}</span>
                         </button>
 
                         <button
@@ -69,7 +62,7 @@ export default function VideoPost({
                             type="button"
                         >
                             <SendIcon />
-                            <span>{videoDetails.shareCount}</span>
+                            <span>{postDetails.shareCount}</span>
                         </button>
                     </div>
 
@@ -83,10 +76,11 @@ export default function VideoPost({
                     </div>
                 </div>
 
+                {/* liked by users area */}
                 {likeCount > 0 &&
                     <div className="liked-by-users-area one-line">
                         <div className="profile-images">
-                            {videoDetails.likes.map((v, i) => {
+                            {postDetails.likes.map((v, i) => {
                                 if (i < maxProfileImgCount)
                                     return (
                                         <img
@@ -99,7 +93,7 @@ export default function VideoPost({
                         </div>
 
                         <span className="who-liked">
-                            <b>{videoDetails.likes[0].likedBy.username} </b>
+                            <b>{postDetails.likes[0].likedBy.username} </b>
                             {likeCount > 1 && <span>ve <b>diğerleri</b> </span>}
                             beğendi.
                         </span>
@@ -107,20 +101,19 @@ export default function VideoPost({
                 }
 
                 <div className="description-area">
-                    <span className="username">{videoDetails.owner.username} </span>
-                    <span className="description">{videoDetails.description}</span>
+                    <span className="username">{postDetails.owner.username} </span>
+                    <span className="description">{postDetails.description}</span>
                 </div>
 
                 <div className="date-area">
-                    <p className="published-at">{videoDetails.publishedAt}</p>
+                    <p className="published-at">{postDetails.publishedAt}</p>
                 </div>
             </div>
         </div>
     );
 }
 
-export interface VideoPostProps {
-    videoSrc: string
-    thumbnailSrc: string
-    videoDetails: VideoDetails
+export interface ImagePostProps {
+    imgSrc: string,
+    postDetails: PostDetails
 }

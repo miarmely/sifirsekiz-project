@@ -1,0 +1,61 @@
+.bottom-navbar {
+    padding: 8px 0px 15px;
+    position: fixed;
+    inset: auto 0 0;
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px solid var(--divider-line-color-smooth);
+    background-color: var(--bg-color-main);
+
+    &>.menu {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        & {
+            &>div {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 0px 5px;
+
+                &>.menu-icon,
+                &>.lucide {
+                    width: 1.7em;
+                    height: 1.7em;
+                    color: var(--text-color-main);
+                }
+
+                &>.menu-name {
+                    font-size: 0.95em;
+                    color: var(--text-color-main);
+                }
+            }
+
+            &>.menu-line {
+                width: 100%;
+                height: 2.5px;
+                border-radius: 10px;
+                background-color: transparent;
+            }
+        }
+
+        &.open {
+            &>div {
+
+                &>.menu-icon,
+                &>.lucide {
+                    color: var(--border-color-selected-menu);
+                }
+
+                &>.menu-name {
+                    color: var(--border-color-selected-menu);
+                }
+            }
+
+            &>.menu-line {
+                background-color: var(--border-color-selected-menu);
+            }
+        }
+    }
+}

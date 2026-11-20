@@ -1,7 +1,7 @@
 #explorer-page {
-    &>.promo-video {}
 
-    &>.latest-posts {
+    &>.latest-posts-grid,
+    &>.latest-posts-feed {
         display: flex;
         flex-direction: column;
 

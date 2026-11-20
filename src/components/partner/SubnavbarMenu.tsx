@@ -1,6 +1,6 @@
 import "./SubnavbarMenu.css";
 import type { ReactNode } from "react";
-import type { Setter } from "../models/Types";
+import type { Setter } from "../../models/Types";
 
 export function SubnavbarMenuBox({
     menus,
@@ -27,10 +27,10 @@ export function SubnavbarMenuBox({
         : {};
 
     return (
-        <div className="subnavbar"
+        <nav className="subnavbar"
             style={boxStyle}>
             {subnavbarMenus}
-        </div>
+        </nav>
     );
 }
 

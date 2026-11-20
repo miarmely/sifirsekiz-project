@@ -1,12 +1,14 @@
 import './App.css'
-import ExplorerPage from './components/ExplorerPage'
-import Navbar from './components/Navbar'
-import { TreesIcon } from 'lucide-react';
+import ExplorerPage from './components/ExplorerPage';
+import MainNavbar from './components/MainNavbar'
+import { ClapperboardIcon, CompassIcon, MapPinIcon, TreesIcon, UserIcon } from 'lucide-react';
 import type { District } from './models/Interfaces';
 import { useState } from 'react';
+import BottomNavbar from './components/BottomNavbar';
 
 function App() {
   const [selectedDistrictMenuIndex, setSelectedDistrictMenuIndex] = useState(0);
+  const [selectedBottomNavbarMenuIndex, setSelectedBottomNavbarMenuIndex] = useState(0);
   const districts: District[] = [
     {
       name: "Macahel",
@@ -62,12 +64,25 @@ function App() {
 
   return (
     <>
-      <Navbar districts={districts} />
+      <MainNavbar districts={districts} />
 
-      <ExplorerPage
-        districts={districts}
-        selectedDistrictMenuIndex={selectedDistrictMenuIndex}
-        setSelectedDistrictMenuIndex={setSelectedDistrictMenuIndex}
+      {selectedBottomNavbarMenuIndex === 0 &&
+        <ExplorerPage
+          districts={districts}
+          selectedDistrictMenuIndex={selectedDistrictMenuIndex}
+          setSelectedDistrictMenuIndex={setSelectedDistrictMenuIndex}
+        />
+      }
+
+      <BottomNavbar
+        menus={[
+          { icon: <CompassIcon />, name: "Keşfet" },
+          { icon: <MapPinIcon />, name: "Yerler" },
+          { icon: <ClapperboardIcon />, name: "Filmler" },
+          { icon: <UserIcon />, name: "Profil" }
+        ]}
+        selectedMenuIndex={selectedBottomNavbarMenuIndex}
+        setSelectedMenuIndex={setSelectedBottomNavbarMenuIndex}
       />
     </>
   )
