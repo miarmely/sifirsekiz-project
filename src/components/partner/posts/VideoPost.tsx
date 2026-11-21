@@ -3,7 +3,6 @@ import MiarVideoPlayer from "../../lib/MiarVideoPlayer";
 import { BookmarkIcon, HeartIcon, MapPinIcon, MessageCircleIcon, SendIcon, TextAlignJustifyStart } from "lucide-react"
 import VerifiedBadgeIcon from "../../lib/icons/VerifiedBadgeIcon";
 import type { PostDto, VideoPostDto } from "../../../models/PostModels/PostDto";
-import { useRef } from "react";
 
 export default function VideoPost({
     postIndex,
