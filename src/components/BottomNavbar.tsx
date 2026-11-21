@@ -11,6 +11,7 @@ export default function BottomNavbar({
         <nav className="bottom-navbar">
             {menus.map((m, i) =>
                 <div
+                    key={i}
                     className={"menu" + (i === selectedMenuIndex ? " open" : "")}
                     onClick={() => setSelectedMenuIndex(i)}
                 >

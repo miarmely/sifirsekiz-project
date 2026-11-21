@@ -1,33 +1,37 @@
 import "./ImagePost.css";
 import { BookmarkIcon, HeartIcon, MapPinIcon, MessageCircleIcon, SendIcon, TextAlignJustifyStart } from "lucide-react"
 import VerifiedBadgeIcon from "../../lib/icons/VerifiedBadgeIcon";
-import type { PostDetails } from "../../../models/PostDetails";
+import type { ImagePostDto, PostDto } from "../../../models/PostModels/PostDto";
 
 export default function ImagePost({
-    imgSrc,
-    postDetails
+    postIndex,
+    postDto
 }: ImagePostProps) {
     const maxProfileImgCount = 3;  // profile images at "liked by users" area
-    const likeCount = postDetails.likes.length;
+    const likeCount = postDto.likes.length;
+    const media = postDto.media as ImagePostDto;
 
     return (
-        <div className="post  img-post  add-cursor">
+        <div
+            id={`post-feed-${postIndex}`}
+            className="post  img-post  add-cursor"
+        >
             <div className="head">
                 <img
                     className="profile-img"
-                    src={postDetails.owner.profileImagePath}
+                    src={postDto.publishedBy.profileImagePath}
                 />
 
                 <div className="username-area">
                     <p className="username  one-line">
-                        {postDetails.owner.username}
+                        {postDto.publishedBy.username}
                         <VerifiedBadgeIcon />
                     </p>
                     {/* <p className="song">Koliva - Yüksek Dağlara Doğru</p> */}
 
                     <p className="location  one-line ">
                         <MapPinIcon className="icon" />
-                        {postDetails.location}
+                        {postDto.location.name}
                     </p>
                 </div>
 
@@ -35,7 +39,7 @@ export default function ImagePost({
             </div>
 
             <div className="body">
-                <img src={imgSrc} />
+                <img src={media.imagePath} />
             </div>
 
             <div className="foot">
@@ -46,7 +50,7 @@ export default function ImagePost({
                             type="button"
                         >
                             <HeartIcon />
-                            <span>{postDetails.likes.length}</span>
+                            <span>{postDto.likes.length}</span>
                         </button>
 
                         <button
@@ -54,7 +58,7 @@ export default function ImagePost({
                             type="button"
                         >
                             <MessageCircleIcon />
-                            <span>{postDetails.comments.length}</span>
+                            <span>{postDto.comments.length}</span>
                         </button>
 
                         <button
@@ -62,7 +66,7 @@ export default function ImagePost({
                             type="button"
                         >
                             <SendIcon />
-                            <span>{postDetails.shareCount}</span>
+                            <span>{postDto.shares.length}</span>
                         </button>
                     </div>
 
@@ -78,9 +82,9 @@ export default function ImagePost({
 
                 {/* liked by users area */}
                 {likeCount > 0 &&
-                    <div className="liked-by-users-area one-line">
+                    <div className="liked-by-users-area">
                         <div className="profile-images">
-                            {postDetails.likes.map((v, i) => {
+                            {postDto.likes.map((v, i) => {
                                 if (i < maxProfileImgCount)
                                     return (
                                         <img
@@ -93,7 +97,7 @@ export default function ImagePost({
                         </div>
 
                         <span className="who-liked">
-                            <b>{postDetails.likes[0].likedBy.username} </b>
+                            <b>{postDto.likes[0].likedBy.username} </b>
                             {likeCount > 1 && <span>ve <b>diğerleri</b> </span>}
                             beğendi.
                         </span>
@@ -101,12 +105,12 @@ export default function ImagePost({
                 }
 
                 <div className="description-area">
-                    <span className="username">{postDetails.owner.username} </span>
-                    <span className="description">{postDetails.description}</span>
+                    <span className="username">{postDto.publishedBy.username} </span>
+                    <span className="description">{postDto.description}</span>
                 </div>
 
                 <div className="date-area">
-                    <p className="published-at">{postDetails.publishedAt}</p>
+                    <p className="published-at">{postDto.publishedAt}</p>
                 </div>
             </div>
         </div>
@@ -114,6 +118,6 @@ export default function ImagePost({
 }
 
 export interface ImagePostProps {
-    imgSrc: string,
-    postDetails: PostDetails
+    postIndex: number,
+    postDto: PostDto
 }

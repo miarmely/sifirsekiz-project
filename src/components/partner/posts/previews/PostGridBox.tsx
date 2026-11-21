@@ -1,13 +1,13 @@
-import "./PostPreviewBox.css";
+import "./PostGridBox.css";
 import type { ReactNode } from "react";
 
-export default function PostPreviewBox({
+export default function PostGridBox({
     children
 }: PostPreviewBoxProps) {
     const posts = children;
 
     return (
-        <div className="post-preview-box">
+        <div className="post-grid-box">
             {posts}
         </div>
     );

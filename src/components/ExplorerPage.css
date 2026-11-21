@@ -1,7 +1,7 @@
 #explorer-page {
 
-    &>.latest-posts-grid,
-    &>.latest-posts-feed {
+    & .latest-posts-grid,
+    & .latest-posts-feed {
         display: flex;
         flex-direction: column;
 

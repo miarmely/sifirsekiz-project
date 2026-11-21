@@ -1,7 +1,9 @@
 export interface PostDto {
     postId: string
     type: PostTypeDto
+    media: PostMediaType
     description: string
+    location: LocationDto
     likes: PostLikeDto[]
     comments: PostCommentDto[]
     shares: PostShareDto[]
@@ -23,9 +25,9 @@ export interface PostLikeDto {
 
 export interface PostCommentDto {
     postCommentId: string
-    Comment: string
-    CommentedBy: UserDto
-    CommentedAt: string
+    comment: string
+    commentedBy: UserDto
+    commentedAt: string
 }
 
 export interface PostShareDto {
@@ -43,10 +45,22 @@ export interface PostBookmarkDto {
 
 export interface LocationDto {
     locationId: string,
-    locationName: string
+    name: string
 }
 
 export interface UserDto {
     userId: string
     username: string
+    profileImagePath: string
 };
+
+export type PostMediaType = VideoPostDto | ImagePostDto;
+
+export interface VideoPostDto {
+    videoPath: string,
+    thumbnailPath: string
+}
+
+export interface ImagePostDto {
+    imagePath: string
+}

@@ -6,6 +6,7 @@
     justify-content: space-around;
     border-top: 1px solid var(--divider-line-color-smooth);
     background-color: var(--bg-color-main);
+    z-index: 1000;
 
     &>.menu {
         display: flex;

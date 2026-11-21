@@ -34,6 +34,10 @@ h6 {
   color: var(--text-color-main);
 }
 
+#root {
+  padding-bottom: 82px;
+}
+
 /* ---------- custom classes ---------- */
 
 .vertical-line {

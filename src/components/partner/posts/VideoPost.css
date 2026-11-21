@@ -1,3 +1,3 @@
 .post-box {
-    & .video-post {}
+    &>.video-post {}
 }

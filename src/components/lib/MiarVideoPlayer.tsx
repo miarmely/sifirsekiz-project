@@ -1,44 +1,70 @@
 import "./MiarVideoPlayer.css";
 import { PauseIcon, PlayIcon } from "lucide-react";
-import { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { toVideoTime } from "../../lib/MiarTools";
+import { observeElement } from "../../lib/MiarScroll";
 
 export default function MiarVideoPlayer({
+    type,
     videoSrc,
     thumbnailSrc,
     buttonTextForPlay,
     buttonTextForPause,
     thumbnailTextInHtml,
-    isMuted,
-    type
+    isMuted = false,
+    autoPlayWhenIntersected = false
 }: MiarVideoPlayerProps) {
-    const videoRef = useRef<HTMLVideoElement>(null);
     const addHoursSection = useRef(false);  // for convert time from "00:00" to "00:00:00" by video duration.
-    const [isPlaying, setIsPlaying] = useState(false);
+    const videoRef = useRef<HTMLVideoElement>(null);
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0);
+    const [isPlaying, setIsPlaying] = useState(false);
     const [error, setError] = useState("");
 
-    const togglePlayback = async () => {
+    // play/pause video
+    const togglePlayback = async (force?: "pause" | "start") => {
         // get video
         const video = videoRef.current;
         if (!video) return;
 
         // pause video
-        if (!video.paused) {
+        if (force !== "start"
+            && !video.paused
+        ) {
             video.pause();
             return;
         }
 
         // play video (EXCEPTION-SAFE)
-        try {
-            await video.play();
-            setError("");
-        }
-        catch {
-            setError("Video couldn't play.");
-        }
+        if (force !== "pause")
+            try {
+                await video.play();
+                setError("");
+            }
+            catch (ex) {
+                setError("Video couldn't play.");
+                console.log(ex);
+            }
     };
+
+    // set "video observer" (runs just once)
+    useEffect(() => {
+        if (!autoPlayWhenIntersected) return;
+
+        // start intersection observer
+        const videoObserver = observeElement({
+            element: videoRef.current,
+            threshold: 0.5,
+            onIntersecting: () => togglePlayback("start"),  // play
+            onNotIntersecting: () => togglePlayback("pause")  // pause
+        });
+
+        // when component unmounted
+        return () => {
+            videoObserver?.release();
+            togglePlayback("pause");
+        }
+    }, [autoPlayWhenIntersected])
 
     const videoOverlayForType1 = (
         <div className="video-overlay">
@@ -52,7 +78,7 @@ export default function MiarVideoPlayer({
 
                     <button
                         className="play-btn  btn-trans  item-shade"
-                        onClick={togglePlayback}
+                        onClick={() => togglePlayback()}
                     >
                         {isPlaying ?
                             <>
@@ -73,7 +99,7 @@ export default function MiarVideoPlayer({
                 <button
                     className="play-btn  btn-trans"
                     type="button"
-                    onClick={togglePlayback}
+                    onClick={() => togglePlayback()}
                 >
                     {isPlaying ? <PauseIcon /> : <PlayIcon />}
                 </button>
@@ -114,7 +140,7 @@ export default function MiarVideoPlayer({
                 <div className="video-thumbnail-text">
                     <button
                         className="play-btn  btn-trans  item-shade"
-                        onClick={togglePlayback}
+                        onClick={() => togglePlayback()}
                     >
                         {isPlaying ?
                             <>
@@ -130,41 +156,6 @@ export default function MiarVideoPlayer({
                     </button>
                 </div>
             }
-
-            {/* <div className="video-controls">
-                <button
-                    className="play-btn  btn-trans"
-                    type="button"
-                    onClick={togglePlayback}
-                >
-                    {isPlaying ? <PauseIcon /> : <PlayIcon />}
-                </button>
-
-                <div className="video-time">
-                    {toVideoTime(currentTime, addHoursSection.current)}
-                    <span> / </span>
-                    {toVideoTime(duration, addHoursSection.current)}
-                </div>
-
-                <input
-                    className="video-location"
-                    aria-label="Video konumu"
-                    type="range"
-                    min={0}
-                    max={duration}
-                    step={0.1}
-                    value={currentTime}
-                    disabled={duration === 0}
-                    onChange={e => {
-                        const trgTime = e.currentTarget.valueAsNumber;
-                        const video = videoRef.current;
-                        if (!trgTime || !video) return;
-
-                        video.currentTime = trgTime;
-                        setCurrentTime(trgTime);
-                    }}
-                />
-            </div> */}
 
             {error && <p role="alert">{error}</p>}
         </div>
@@ -188,7 +179,7 @@ export default function MiarVideoPlayer({
 
                     setDuration(Number.isFinite(duration) ? duration : 0);
                 }}
-                muted={isMuted === true}
+                muted={isMuted}
             />
 
             {type === 1 ? videoOverlayForType1 : videoOverlayForType2}
@@ -196,6 +187,9 @@ export default function MiarVideoPlayer({
     );
 }
 
+/**
+ * @param autoPlayWhenIntersected it enable/disable "intersection observer" of MiarVideoPlayer. (When "true", video will "start" when scroll in itself and will "stop" when scroll out itself.)
+ */
 export interface MiarVideoPlayerProps {
     type: number,  // 1 or 2
     videoSrc: string,
@@ -203,5 +197,6 @@ export interface MiarVideoPlayerProps {
     buttonTextForPlay?: string,
     buttonTextForPause?: string,
     thumbnailTextInHtml?: React.JSX.Element,
-    isMuted?: boolean
+    isMuted?: boolean,
+    autoPlayWhenIntersected?: boolean
 }
