@@ -49,14 +49,19 @@ export default function MiarVideoPlayer({
 
     // set "video observer" (runs just once)
     useEffect(() => {
-        if (!autoPlayWhenIntersected) return;
+        // pre-check
+        const video = videoRef.current;
+        if (!video || !autoPlayWhenIntersected) return;
 
         // start intersection observer
         const videoObserver = observeElement({
             element: videoRef.current,
             threshold: 0.5,
             onIntersecting: () => togglePlayback("start"),  // play
-            onNotIntersecting: () => togglePlayback("pause")  // pause
+            onNotIntersecting: () => {
+                togglePlayback("pause");  // pause
+                video.currentTime = 0; // rollback video to start. (NOT: setCurrentTime() not works in here.)
+            }
         });
 
         // when component unmounted
@@ -136,26 +141,40 @@ export default function MiarVideoPlayer({
 
     const videoOverlayForType2 = (
         <div className="video-overlay">
-            {!isPlaying &&
-                <div className="video-thumbnail-text">
-                    <button
-                        className="play-btn  btn-trans  item-shade"
-                        onClick={() => togglePlayback()}
-                    >
-                        {isPlaying ?
-                            <>
-                                <PauseIcon />
-                                {buttonTextForPause && <span>{buttonTextForPause}</span>}
-                            </>
-                            :
-                            <>
-                                <PlayIcon />
-                                {buttonTextForPlay && <span>{buttonTextForPlay}</span>}
-                            </>
-                        }
-                    </button>
+            <div className="video-controls">
+                <button
+                    className="play-btn  btn-trans"
+                    type="button"
+                    onClick={() => togglePlayback()}
+                >
+                    {isPlaying ? <PauseIcon /> : <PlayIcon />}
+                </button>
+
+                <div className="video-time">
+                    {toVideoTime(currentTime, addHoursSection.current)}
+                    <span> / </span>
+                    {toVideoTime(duration, addHoursSection.current)}
                 </div>
-            }
+
+                <input
+                    className="video-location"
+                    aria-label="Video konumu"
+                    type="range"
+                    min={0}
+                    max={duration}
+                    step={0.1}
+                    value={currentTime}
+                    disabled={duration === 0}
+                    onChange={e => {
+                        const trgTime = e.currentTarget.valueAsNumber;
+                        const video = videoRef.current;
+                        if (!trgTime || !video) return;
+
+                        video.currentTime = trgTime;
+                        setCurrentTime(trgTime);
+                    }}
+                />
+            </div>
 
             {error && <p role="alert">{error}</p>}
         </div>
@@ -171,7 +190,10 @@ export default function MiarVideoPlayer({
                 preload="metadata"
                 onPlay={() => setIsPlaying(true)}
                 onPause={() => setIsPlaying(false)}
-                onEnded={() => setIsPlaying(false)}
+                onEnded={() => {
+                    setIsPlaying(false);
+                    setCurrentTime(0);
+                }}
                 onTimeUpdate={e => setCurrentTime(e.currentTarget.currentTime)}
                 onDurationChange={e => {
                     const duration = e.currentTarget.duration;

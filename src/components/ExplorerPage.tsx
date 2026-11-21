@@ -33,7 +33,7 @@ export default function ExplorerPage({
     });
 
     // set "latest posts" navbar menus
-    const latestPostsMenuNames = ["Tümü", "Fotoğraflar", "Filmler"];
+    const latestPostsMenuNames = ["Tümü", "Videolar", "Fotoğraflar"];
     const latestPostsMenus: SubnavbarMenuModel[] = latestPostsMenuNames.map((m, i) => {
         return {
             index: i,
@@ -76,8 +76,9 @@ export default function ExplorerPage({
     ];
 
     const postTypes: PostTypeDto[] = [
-        { postTypeId: "1", type: "Video" },
-        { postTypeId: "2", type: "Image" }
+        { postTypeId: "1", type: "All" },
+        { postTypeId: "2", type: "Video" },
+        { postTypeId: "3", type: "Image" }
     ]
 
     const locations: LocationDto[] = [
@@ -90,7 +91,7 @@ export default function ExplorerPage({
     const posts: PostDto[] = [
         {
             postId: "1",
-            type: postTypes[0],
+            type: postTypes[1],
             media: {
                 videoPath: "/videos/artvin/content-2.mp4",
                 thumbnailPath: "/images/artvin/content-4.png"
@@ -119,7 +120,7 @@ export default function ExplorerPage({
         },
         {
             postId: "2",
-            type: postTypes[0],
+            type: postTypes[1],
             media: {
                 videoPath: "/videos/artvin/content-1.mp4",
                 thumbnailPath: "/images/artvin/content-2.png"
@@ -149,7 +150,7 @@ export default function ExplorerPage({
         },
         {
             postId: "3",
-            type: postTypes[1],
+            type: postTypes[2],
             media: {
                 imagePath: "/images/artvin/content-2.png"
             },
@@ -179,7 +180,7 @@ export default function ExplorerPage({
         },
         {
             postId: "4",
-            type: postTypes[1],
+            type: postTypes[2],
             media: {
                 imagePath: "/images/artvin/content-3.png"
             },
@@ -210,7 +211,7 @@ export default function ExplorerPage({
         },
         {
             postId: "5",
-            type: postTypes[0],
+            type: postTypes[1],
             media: {
                 videoPath: "/videos/artvin/content-4.mp4",
                 thumbnailPath: "/images/artvin/content-1.png"
@@ -242,7 +243,7 @@ export default function ExplorerPage({
         },
         {
             postId: "6",
-            type: postTypes[0],
+            type: postTypes[1],
             media: {
                 videoPath: "/videos/artvin/content-3.mp4",
                 thumbnailPath: "/images/artvin/content-3.png"
@@ -351,29 +352,42 @@ export default function ExplorerPage({
                         </div>
 
                         <PostGridBox>
-                            {posts.map((p, i) => {
-                                if (p.type.postTypeId === "1")
-                                    return <VideoGridPost
-                                        key={i}
-                                        postIndex={i}
-                                        thumbnailSrc={(p.media as VideoPostDto).thumbnailPath}
-                                        currentTabIndex={tabs.feed}
-                                        setCurrentTabIndex={setCurrentTabIndex}
-                                        selectedGridPostIndex={selectedGridPostIndex}
-                                        setSelectedGridPostIndex={setSelectedGridPostIndex}
-                                    />
+                            {posts
+                                .filter(p => {
+                                    // if "all" selected, do not filter
+                                    if (selectedLatestPostsMenuIndex === 0)
+                                        return true;
 
-                                if (p.type.postTypeId === "2")
-                                    return <ImageGridPost
-                                        key={i}
-                                        postIndex={i}
-                                        imgSrc={(p.media as ImagePostDto).imagePath}
-                                        currentTabIndex={tabs.feed}
-                                        setCurrentTabIndex={setCurrentTabIndex}
-                                        selectedGridPostIndex={selectedGridPostIndex}
-                                        setSelectedGridPostIndex={setSelectedGridPostIndex}
-                                    />
-                            })}
+                                    // if "video" selected
+                                    if (selectedLatestPostsMenuIndex === 1)
+                                        return p.type.postTypeId === "2";
+
+                                    if (selectedLatestPostsMenuIndex === 2)
+                                        return p.type.postTypeId === "3";
+                                })
+                                .map((p, i) => {
+                                    if (p.type.postTypeId === "2")
+                                        return <VideoGridPost
+                                            key={i}
+                                            postIndex={i}
+                                            thumbnailSrc={(p.media as VideoPostDto).thumbnailPath}
+                                            currentTabIndex={tabs.feed}
+                                            setCurrentTabIndex={setCurrentTabIndex}
+                                            selectedGridPostIndex={selectedGridPostIndex}
+                                            setSelectedGridPostIndex={setSelectedGridPostIndex}
+                                        />
+
+                                    if (p.type.postTypeId === "3")
+                                        return <ImageGridPost
+                                            key={i}
+                                            postIndex={i}
+                                            imgSrc={(p.media as ImagePostDto).imagePath}
+                                            currentTabIndex={tabs.feed}
+                                            setCurrentTabIndex={setCurrentTabIndex}
+                                            selectedGridPostIndex={selectedGridPostIndex}
+                                            setSelectedGridPostIndex={setSelectedGridPostIndex}
+                                        />
+                                })}
                         </PostGridBox>
                     </div>
                 </>
@@ -400,22 +414,35 @@ export default function ExplorerPage({
                     </div>
 
                     <PostBox>
-                        {posts.map((p, i) => {
-                            if (p.type.postTypeId === "1")
-                                return <VideoPost
-                                    key={i}
-                                    postIndex={i}
-                                    postDto={p}
-                                    autoPlayWhenIntersected={true}
-                                />
+                        {posts
+                            .filter(p => {
+                                // if "all" selected, do not filter
+                                if (selectedLatestPostsMenuIndex === 0)
+                                    return true;
 
-                            if (p.type.postTypeId === "2")
-                                return <ImagePost
-                                    key={i}
-                                    postIndex={i}
-                                    postDto={p}
-                                />
-                        })}
+                                // if "video" selected
+                                if (selectedLatestPostsMenuIndex === 1)
+                                    return p.type.postTypeId === "2";
+
+                                if (selectedLatestPostsMenuIndex === 2)
+                                    return p.type.postTypeId === "3";
+                            })
+                            .map((p, i) => {
+                                if (p.type.postTypeId === "2")
+                                    return <VideoPost
+                                        key={i}
+                                        postIndex={i}
+                                        postDto={p}
+                                        autoPlayWhenIntersected={true}
+                                    />
+
+                                if (p.type.postTypeId === "3")
+                                    return <ImagePost
+                                        key={i}
+                                        postIndex={i}
+                                        postDto={p}
+                                    />
+                            })}
                     </PostBox>
                 </div>
             }
