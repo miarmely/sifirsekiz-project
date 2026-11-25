@@ -16,6 +16,15 @@ Sıfır Sekiz is a mobile-first media platform for discovering Artvin, Türkiye,
 | --- | --- | --- | --- |
 | ![Explore with the featured Artvin film](docs/screenshots/explore.jpg) | ![Latest posts grid](docs/screenshots/latest-posts.jpg) | ![Video post in the feed](docs/screenshots/video-feed.jpg) | ![Photo post in the feed](docs/screenshots/photo-feed.jpg) |
 
-## Built with
+## Technology stack
 
-React, TypeScript, Vite, CSS, and Lucide React.
+| Layer | Technologies |
+| --- | --- |
+| Frontend | React, TypeScript, Vite, CSS, Lucide React |
+| Backend API | C#, ASP.NET Core Web API (.NET 9) |
+| Data access and persistence | Entity Framework Core, PostgreSQL |
+| API documentation | Swagger / OpenAPI |
+
+## Development status
+
+The mobile preview shows the Explore page, media filters, and post feed. Backend integration is in progress. The API will provide the data for the feed, including photo and video post records, captions, and Artvin district and village information.
